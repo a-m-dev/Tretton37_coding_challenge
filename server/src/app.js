@@ -4,11 +4,18 @@ import morgan from "morgan";
 import { json, urlencoded } from "body-parser";
 
 import AppConfig from "./utils/AppConfig";
-import Connect from "./utils/mongoConnect";
-import sleep from "./utils/sleep";
+import Connect from "./utils/MongoConnect";
+import Sleep from "./utils/Sleep";
+
+import CorsMiddleware from "./middlewares/cors";
+import NoRouteMatch from "./middlewares/noRouteMatch";
+import GlobalErrorHandler from "./middlewares/globalErrorHandler";
 
 // app
 const app = express();
+
+// handle CORS
+app.use(CorsMiddleware);
 
 // set up middlewares
 app.use(cors());
@@ -22,6 +29,10 @@ app.get("/", (req, res) => {
     message: "Hi thereeeeeeeeasdf naklsdnf kljasndfjk l",
   });
 });
+
+// error handling
+app.use(NoRouteMatch);
+app.use(GlobalErrorHandler);
 
 //setting up server
 (async function BootUpServer() {
@@ -38,7 +49,7 @@ app.get("/", (req, res) => {
       JSON.stringify(error, null, 2)
     );
 
-    await sleep(1000);
+    await Sleep(1000);
 
     console.log("[SERVER:PARACHUTE]: retrying to connect to mongoDB");
     BootUpServer();
