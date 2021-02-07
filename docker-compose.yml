@@ -19,5 +19,26 @@ services:
         max-size: "100k"
         max-file: "5"
 
+  tretton_server:
+    build: server
+    container_name: ${TRETTON_BACKEND}
+    restart: always
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - ${TRETTON_BACKEND_PORT}:4010
+    depends_on:
+      - tretton_db
+    links:
+      - tretton_db
+    networks:
+      - tretton_network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100k"
+        max-file: "5"
+
 networks:
   tretton_network:
