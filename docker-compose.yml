@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  tretton_db:
+    image: mongo:latest
+    container_name: ${DB_CONTAINER_NAME}
+    volumes:
+      - ./__MONGO_DATA__:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_USER_PASS}
+    ports:
+      - ${MONGO_EXPOSED_PORT}:27017
+    networks:
+      - tretton_network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100k"
+        max-file: "5"
+
+networks:
+  tretton_network:
