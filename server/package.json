@@ -1,0 +1,35 @@
+{
+  "name": "tretton_backend",
+  "version": "1.0.0",
+  "description": "Tretton37 Employees Service API",
+  "main": "src/app.js",
+  "scripts": {
+    "restart": "rimraf built/* && npm run build && npm run start",
+    "build": "babel src --out-dir built --copy-files",
+    "start": "node built/app.js",
+    "serve": "nodemon --exec npm run restart"
+  },
+  "keywords": [
+    "node",
+    "mongoDB"
+  ],
+  "author": "Ahmad Mirzaei (@a_m_dev)",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.15",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.13",
+    "@babel/core": "^7.12.13",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.13",
+    "@babel/preset-env": "^7.12.13",
+    "babel-core": "^6.26.3",
+    "babel-preset-minify": "^0.5.1",
+    "nodemon": "^2.0.7",
+    "rimraf": "^3.0.2"
+  }
+}
