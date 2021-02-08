@@ -12,6 +12,8 @@ import CorsMiddleware from "./middlewares/cors";
 import NoRouteMatch from "./middlewares/noRouteMatch";
 import GlobalErrorHandler from "./middlewares/globalErrorHandler";
 
+import EmployeeSeeder from "./seeder/EmployeeSeeder";
+
 // Domain Routers
 import EmployeeRouter from "./resources/employee/employee.router";
 
@@ -27,8 +29,8 @@ app.use(CorsMiddleware);
 // set up middlewares
 app.use(cors());
 app.use(json());
-app.use(morgan("dev"));
 app.use(urlencoded({ extended: true }));
+app.use(morgan("dev"));
 
 // endpoints
 app.use(`/api/${AppConfig.apiVersions["v1.0"]}/employees`, EmployeeRouter);
@@ -41,6 +43,10 @@ app.use(GlobalErrorHandler);
 (async function BootUpServer() {
   try {
     await Connect();
+
+    // seeders
+    EmployeeSeeder();
+
     app.listen(AppConfig.PORT, () => {
       console.log(`
         [SERVER]: Tretton Server is Ready on http://localhost:${AppConfig.PORT}
