@@ -1,24 +1,38 @@
 import mongoose from "mongoose";
 import RegExManager from "../../utils/RegExManager";
 
-const employeeSchema = mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, match: RegExManager.emailRegex },
-  phoneNumber: { type: String, required: true },
-  office: { type: String, default: "Lund" },
-  tagLine: { type: String, default: null },
-  manager: { type: String, required: true, match: RegExManager.emailRegex },
-  orgUnit: { type: String, required: true, default: "/Employees" },
-  mainText: { type: String, required: true, default: "No Profile Description" },
-  gitHub: { type: String },
-  twitter: { type: String },
-  stackoverflow: { type: String },
-  linkedIn: { type: String },
-  imagePortraitUrl: { type: String, required: true },
-  imageBodyUrl: { type: String },
-  imageWallOfLeetUrl: { type: String },
-  highlighted: { type: Boolean, required: true, default: false },
-});
+const employeeSchema = mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    email: {
+      type: String,
+      match: RegExManager.emailRegex,
+      unique: true,
+      required: true,
+    },
+    phoneNumber: { type: String },
+    office: { type: String, default: "Lund" },
+    tagLine: { type: String, default: null },
+    manager: { type: String, match: RegExManager.emailRegex },
+    orgUnit: { type: String, required: true, default: "/Employees" },
+    mainText: {
+      type: String,
+      default: "No Profile Description",
+    },
+    gitHub: { type: String },
+    twitter: { type: String },
+    stackOverflow: { type: String },
+    linkedIn: { type: String },
+    imagePortraitUrl: { type: String },
+    imageBodyUrl: { type: String },
+    imageWallOfLeetUrl: { type: String },
+    highlighted: { type: Boolean, required: true, default: false },
+  },
+  {
+    timestamps: true,
+    retainKeyOrder: true,
+  }
+);
 
 export const EmployeeModel = mongoose.model("Employee", employeeSchema);
 export const propMini = [
@@ -35,4 +49,4 @@ export const propImages = [
   "imageWallOfLeetUrl",
   "highlighted",
 ];
-export const propSocial = ["gitHub", "twitter", "linkedIn", "stackoverflow"];
+export const propSocial = ["gitHub", "twitter", "linkedIn", "stackOverflow"];

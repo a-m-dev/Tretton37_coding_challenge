@@ -8,6 +8,7 @@ const AppConfig = {
   buildVersion: pkg.version,
   mongoDB_URI: "mongodb://root:examplePass@tretton_mongo_db:27017",
   DBName: "tretton_db",
+  listItemsPerPageCount: 10,
 };
 
 export default AppConfig;
