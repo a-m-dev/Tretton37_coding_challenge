@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 import cors from "cors";
 import morgan from "morgan";
 import { json, urlencoded } from "body-parser";
@@ -10,6 +11,12 @@ import Sleep from "./utils/Sleep";
 import CorsMiddleware from "./middlewares/cors";
 import NoRouteMatch from "./middlewares/noRouteMatch";
 import GlobalErrorHandler from "./middlewares/globalErrorHandler";
+
+// Domain Routers
+import EmployeeRouter from "./resources/employee/employee.router";
+
+// mongoose promise
+mongoose.Promise = global.Promise;
 
 // app
 const app = express();
@@ -24,11 +31,7 @@ app.use(morgan("dev"));
 app.use(urlencoded({ extended: true }));
 
 // endpoints
-app.get("/", (req, res) => {
-  res.status(200).json({
-    message: "Hi thereeeeeeeeasdf naklsdnf kljasndfjk l",
-  });
-});
+app.use(`/api/${AppConfig.apiVersions["v1.0"]}/employees`, EmployeeRouter);
 
 // error handling
 app.use(NoRouteMatch);

@@ -1,15 +1,15 @@
 const ResponseGenerator = () => {
   return {
-    success({ code, message = "It's OK", result: [] }) {
+    success({ code, message = "It's OK", result = [] }) {
       return {
         meta: { code, message },
         data: result,
       };
     },
-    failure({ code, message = "Something went wrong!", err }) {
+    failure({ code, message = "Something went wrong!", error }) {
       return {
         meta: { code, message },
-        error: err,
+        error: error,
       };
     },
   };
