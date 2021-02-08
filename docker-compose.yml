@@ -40,5 +40,25 @@ services:
         max-size: "100k"
         max-file: "5"
 
+  tretton_client:
+    build: client
+    container_name: ${TRETTON_CLIENT}
+    restart: always
+    tty: true
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    ports:
+      - ${TRETTON_CLIENT_PORT}:3000
+    depends_on:
+      - tretton_db
+      - tretton_server
+    networks:
+      - tretton_network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100k"
+        max-file: "5"
 networks:
   tretton_network:
