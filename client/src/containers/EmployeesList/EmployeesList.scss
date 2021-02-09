@@ -3,5 +3,11 @@
 
 .employees-list {
   position: relative;
-  min-height: 1400px;
+
+  &__heading {
+    font-weight: bold;
+    text-align: center;
+    color: $gray-500;
+    font-size: $heading-font-size;
+  }
 }
