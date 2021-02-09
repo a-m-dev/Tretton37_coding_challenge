@@ -47,7 +47,7 @@ services:
     tty: true
     volumes:
       - ./client:/app
-      - /app/node_modules
+      - /app/node_modules/
     ports:
       - ${TRETTON_CLIENT_PORT}:3000
     depends_on:
@@ -60,5 +60,6 @@ services:
       options:
         max-size: "100k"
         max-file: "5"
+
 networks:
   tretton_network:
