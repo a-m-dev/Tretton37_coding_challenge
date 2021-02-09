@@ -4,7 +4,9 @@ function App() {
   return (
     <>
       <Header />
-      <main>Hi From Main</main>
+      <main>
+        {/* <h1 className="header"> The fellowship of tretton37</h1> */}
+      </main>
       <Footer />
     </>
   );
