@@ -22,6 +22,11 @@ body {
   background-size: 250px;
 }
 
+main {
+  padding-top: 150px;
+  padding-bottom: 85px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -32,7 +37,6 @@ a {
   display: inline-block;
   height: fit-content;
   border-radius: $primary-border-radius;
-  @extend .focusable;
   @include makeTransition(0.3s, ease-in-out);
 }
 
