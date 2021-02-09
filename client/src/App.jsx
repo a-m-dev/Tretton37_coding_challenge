@@ -1,5 +1,13 @@
+import { Header, Footer } from "./components";
+
 function App() {
-  return <div className="App">HELLOW</div>;
+  return (
+    <>
+      <Header />
+      <main>Hi From Main</main>
+      <Footer />
+    </>
+  );
 }
 
 export default App;

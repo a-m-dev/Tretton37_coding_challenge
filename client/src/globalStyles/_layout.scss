@@ -3,32 +3,29 @@
 
 .container {
   position: relative;
-  padding: 0 $spacing-lg;
+  padding: 0 $spacing-xxl;
   max-width: 1024px;
   margin: 0 auto;
   width: 100%;
 }
 
-@include MAX_QUERY($table-mid) {
+@include MAX_QUERY($tablet-ceil) {
   .container {
+    max-width: 100%;
     padding: 0 $spacing-xxl;
   }
 }
 
 @include MAX_QUERY($mobile-ceil) {
   .container {
-    padding: 0 $spacing-xl;
+    max-width: 100%;
+    padding: 0 $spacing-lg;
   }
 }
 
 @include MAX_QUERY($mobile-mid) {
   .container {
-    padding: 0 $spacing-lg;
-  }
-}
-
-@include MAX_QUERY($mobile-floor) {
-  .container {
+    max-width: 100%;
     padding: 0 $spacing-md;
   }
 }
