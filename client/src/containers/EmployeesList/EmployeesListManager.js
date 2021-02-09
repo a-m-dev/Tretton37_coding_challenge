@@ -1,5 +1,10 @@
+import { useMemo, useCallback } from "react";
+
 const EmployeesListManager = () => {
-  return {};
+  return {
+    data: {},
+    actions: {},
+  };
 };
 
 export default EmployeesListManager;

@@ -1,0 +1,12 @@
+@import "../../../../globalStyles/variables";
+@import "../../../../globalStyles/mixins";
+@import "../../../../globalStyles/extendables";
+
+.search-area {
+  height: 48px;
+  position: relative;
+  background-color: $white;
+  margin-bottom: $spacing-xl;
+  @extend .makeLikeCard;
+  @include makeFlex(space-between, center);
+}
