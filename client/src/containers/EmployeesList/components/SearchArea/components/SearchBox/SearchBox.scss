@@ -1,6 +1,6 @@
-@import "../../globalStyles/variables.scss";
-@import "../../globalStyles/mixins.scss";
-@import "../../globalStyles/extendables.scss";
+@import "../../../../../../globalStyles/variables";
+@import "../../../../../../globalStyles/extendables";
+@import "../../../../../../globalStyles/mixins";
 
 .search-box {
   position: relative;
@@ -30,20 +30,6 @@
 
     & i {
       color: darken($color: $gray-200, $amount: 30);
-    }
-  }
-
-  &__clear {
-    all: unset;
-    height: 100%;
-    cursor: pointer;
-    color: $gray-500;
-    margin-left: $spacing-md;
-    font-size: $secondary-font-size;
-    @include makeTransition(0.3s, ease-in-out);
-
-    &:hover {
-      color: $gray-800;
     }
   }
 }

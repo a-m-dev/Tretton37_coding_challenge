@@ -1,7 +1,6 @@
 import SearchAreaManager from "./SearchAreaManager";
 import { SearchAreaContext } from "./context";
-import { AdvanceSearchDrawer } from "./components";
-import { SearchBox } from "../../../../components";
+import { SearchBox, AdvanceSearchDrawer } from "./components";
 import "./SearchArea.scss";
 
 const SearchArea = () => {

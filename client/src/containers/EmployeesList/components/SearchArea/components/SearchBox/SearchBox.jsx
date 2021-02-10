@@ -1,7 +1,7 @@
-import Form from "../Form";
-import { InputField } from "../Kit";
+import Form from "../../../../../../components/Form";
+import { InputField } from "../../../../../../components/Kit";
+import useQueryParams from "../../../../../../hooks/useQueryParams";
 import { validationSchema } from "./form";
-import useQueryParams from "../../hooks/useQueryParams";
 import "./SearchBox.scss";
 
 const SearchBox = ({ handleSubmitSearch }) => {
@@ -25,8 +25,6 @@ const SearchBox = ({ handleSubmitSearch }) => {
           <i className="icon-search" />
         </button>
       </Form>
-
-      <button className="search-box__clear">clear</button>
     </section>
   );
 };
