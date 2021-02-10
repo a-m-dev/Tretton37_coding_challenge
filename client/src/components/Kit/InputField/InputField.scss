@@ -1,7 +1,59 @@
-@import "../../../globalStyles/variables";
-@import "../../../globalStyles/mixins";
+@import "../../../globalStyles/variables.scss";
+@import "../../../globalStyles/mixins.scss";
+@import "../../../globalStyles/extendables.scss";
 
 .input-field {
+  all: unset;
   position: relative;
-  background-color: red;
+  height: 100%;
+  width: 100%;
+  max-width: 480px;
+
+  &__label {
+    position: relative;
+    font-size: $secondary-font-size;
+    color: $gray-800;
+    font-weight: bold;
+    padding-left: $spacing-sm;
+  }
+
+  &__input {
+    width: 100%;
+    max-width: 480px;
+    height: 34px;
+    border: 1px solid $gray-200;
+    padding: 0 $spacing-sm;
+    padding-right: $spacing-xxl;
+    font-size: $secondary-font-size;
+    border-radius: $secondary-border-radius;
+    @extend .focusable;
+
+    ::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: $gray-500;
+      opacity: 1; /* Firefox */
+    }
+
+    :-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: $gray-500;
+    }
+
+    ::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: $gray-500;
+    }
+  }
+
+  &__error {
+    left: $spacing-sm;
+    color: $secondary-color;
+    font-size: $secondary-font-size - 4px;
+    position: absolute;
+    color: darken($danger-color, 30);
+    top: $spacing-xl + 2px;
+    background-color: rgba($danger-color, 0.8);
+    padding: 2px $spacing-sm;
+    border-radius: $primary-border-radius;
+  }
 }

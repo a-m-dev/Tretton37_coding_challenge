@@ -3,10 +3,49 @@
 @import "../../../../globalStyles/extendables";
 
 .search-area {
-  height: 48px;
   position: relative;
-  background-color: $white;
   margin-bottom: $spacing-xl;
-  @extend .makeLikeCard;
-  @include makeFlex(space-between, center);
+
+  &__nav {
+    height: 64px;
+    position: relative;
+    @extend .makeLikeCard;
+    background-color: $white;
+    padding: $spacing-sm $spacing-lg;
+    @include makeFlex(space-between, center);
+
+    &-filter-btn {
+      all: unset;
+      cursor: pointer;
+      width: $spacing-xxl;
+      height: $spacing-xxl;
+      background-color: transparent;
+      border-radius: $primary-border-radius;
+      @extend .focusable;
+      @include makeFlex(center, center);
+      @include makeTransition(0.3s, ease-in-out);
+
+      & i {
+        font-size: 1.2rem;
+        color: $gray-500;
+        @include makeTransition(0.3s, ease-in-out);
+      }
+
+      &--active {
+        background-color: $gray-200;
+
+        & i {
+          color: $white;
+        }
+      }
+
+      &:hover {
+        background-color: $light-gray;
+
+        & i {
+          color: darken($gray-500, 10);
+        }
+      }
+    }
+  }
 }

@@ -1,16 +1,35 @@
+import { useField } from "formik";
 import "./InputField.scss";
 
-const InputField = ({ type, onChange }) => {
+const InputField = ({ type, name, placeholder, ...rest }) => {
+  const [field, meta] = useField(name);
+
   return (
-    <article className="input-field">
-      <input type={type} onChange={onChange} className="input-field__input" />
-    </article>
+    <fieldset className="input-field">
+      <input
+        {...field}
+        type={type}
+        name={name}
+        autoComplete="off"
+        placeholder={placeholder}
+        className="input-field__input"
+        {...rest}
+      />
+      {meta.touched && meta.error ? (
+        <div
+          className="input-field__error"
+          data-testid={`${rest["data-testid"]}_error`}
+        >
+          <span>{meta.error}</span>
+        </div>
+      ) : null}
+    </fieldset>
   );
 };
 
 InputField.defaultProps = {
   type: "text",
-  onChange: (evt) => console.log(">>> INPUT CHANGES", evt.target.value),
+  placeholder: "",
 };
 
 export default InputField;

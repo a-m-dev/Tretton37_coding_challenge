@@ -1,12 +1,34 @@
+import SearchAreaManager from "./SearchAreaManager";
+import { SearchAreaContext } from "./context";
+import { AdvanceSearchDrawer } from "./components";
+import { SearchBox } from "../../../../components";
 import "./SearchArea.scss";
-import { InputField } from "../../../../components";
 
 const SearchArea = () => {
+  const {
+    refs,
+    data,
+    actions: { handleToggleAdvanceSearch, ...rest },
+    classModifiers: { getFilterBtnClass },
+  } = SearchAreaManager();
+
   return (
-    <section className="search-area">
-      <InputField type="text" />
-      <i className="icon-equalizer" />
-    </section>
+    <article className="search-area">
+      <SearchAreaContext.Provider value={{ refs, data, actions: { ...rest } }}>
+        <section className="search-area__nav">
+          <SearchBox />
+
+          <button
+            className={getFilterBtnClass}
+            onClick={handleToggleAdvanceSearch}
+          >
+            <i className="icon-equalizer" />
+          </button>
+        </section>
+
+        <AdvanceSearchDrawer />
+      </SearchAreaContext.Provider>
+    </article>
   );
 };
 

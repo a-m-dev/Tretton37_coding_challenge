@@ -1,5 +1,6 @@
 @import "../../globalStyles/variables.scss";
 @import "../../globalStyles/mixins.scss";
+@import "../../globalStyles/extendables.scss";
 
 .header {
   position: fixed;
@@ -22,6 +23,8 @@
 
   & a {
     opacity: 0.8;
+    @extend .focusable;
+    @include makeTransition(0.3s, ease-in-out);
 
     &:hover {
       opacity: 1;
