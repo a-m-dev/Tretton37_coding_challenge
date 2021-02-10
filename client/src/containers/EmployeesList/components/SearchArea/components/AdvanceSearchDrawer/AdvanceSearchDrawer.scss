@@ -4,7 +4,6 @@
 
 .advance-search-drawer {
   position: relative;
-  z-index: -1;
   border-radius: $primary-border-radius;
   background-color: lighten($gray-200, 9);
   margin-top: -$spacing-sm;
@@ -23,7 +22,11 @@
   }
 
   &__body {
+    width: 100%;
     opacity: 0;
+    padding-top: $spacing-md;
+    padding-bottom: $spacing-sm;
+    @include makeFlex(flex-start, flex-start);
     @include makeTransition(0.3s, ease-in-out);
   }
 }

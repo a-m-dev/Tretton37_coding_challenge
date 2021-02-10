@@ -3,7 +3,7 @@
 
 .loading-container {
   width: 100%;
-  height: 250px;
+  height: 100px;
   top: 0;
   position: relative;
   @include makeFlex(center, center, column);
@@ -18,7 +18,6 @@
   position: relative;
   width: 80px;
   height: fit-content;
-  margin-bottom: $spacing-xxl;
 }
 .loading div {
   position: absolute;

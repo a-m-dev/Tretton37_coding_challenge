@@ -1,0 +1,59 @@
+@import "../../../globalStyles/variables.scss";
+@import "../../../globalStyles/mixins.scss";
+@import "../../../globalStyles/extendables.scss";
+
+.checkbox {
+  position: relative;
+  width: 100%;
+  min-height: $spacing-xxl;
+  cursor: pointer;
+  @include makeUnselectable();
+  @include makeFlex(flex-start, center);
+
+  & input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+    &:checked ~ .checkbox__checkmark {
+      background-color: $primary-color;
+
+      &:after {
+        display: block;
+      }
+    }
+  }
+
+  &__label {
+    position: relative;
+    color: $gray-800;
+  }
+
+  &__checkmark {
+    display: block;
+    top: 0;
+    left: 0;
+    height: 22px;
+    width: 22px;
+    margin-right: $spacing-sm;
+    border-radius: $secondary-border-radius;
+    background-color: $gray-200;
+
+    &:after {
+      content: "";
+      position: absolute;
+      display: none;
+      left: $spacing-sm - 1px;
+      top: $spacing-sm + 2px;
+      width: 5px;
+      height: 10px;
+      border: solid $white;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+  }
+}

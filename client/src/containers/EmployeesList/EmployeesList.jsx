@@ -13,6 +13,7 @@ const EmployeeList = () => {
           <h1 className="employees-list__heading">
             The fellowship of the tretton37
           </h1>
+
           <SearchArea />
           <ResultArea />
         </section>
