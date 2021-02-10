@@ -1,10 +1,21 @@
 import Form from "../Form";
 import { InputField } from "../Kit";
-import SearchBoxManager from "./SearchBoxManager";
+import { validationSchema } from "./form";
+import useQueryParams from "../../hooks/useQueryParams";
 import "./SearchBox.scss";
 
-const SearchBox = (props) => {
-  const { formProps } = SearchBoxManager(props);
+const SearchBox = ({ handleSubmitSearch }) => {
+  // params
+  const params = useQueryParams();
+
+  const formProps = {
+    initialValues: {
+      query: params.get("q") || "",
+    },
+    validationSchema,
+    enableReinitialize: true,
+    onSubmit: handleSubmitSearch,
+  };
 
   return (
     <section className="search-box">
@@ -14,6 +25,8 @@ const SearchBox = (props) => {
           <i className="icon-search" />
         </button>
       </Form>
+
+      <button className="search-box__clear">clear</button>
     </section>
   );
 };

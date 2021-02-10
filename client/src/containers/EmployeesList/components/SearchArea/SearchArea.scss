@@ -40,6 +40,24 @@
         }
       }
 
+      &--filtered {
+        background-color: $primary-color;
+        box-shadow: 0 0 0 4px rgba($primary-color, 0.3) !important;
+
+        & i {
+          color: $white;
+        }
+
+        &:hover {
+          background-color: $success-color !important;
+          box-shadow: 0 0 0 4px rgba($success-color, 0.3) !important;
+
+          & i {
+            color: $white !important;
+          }
+        }
+      }
+
       &:hover {
         background-color: $light-gray;
 

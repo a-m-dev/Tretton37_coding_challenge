@@ -8,7 +8,7 @@ const SearchArea = () => {
   const {
     refs,
     data,
-    actions: { handleToggleAdvanceSearch, ...rest },
+    actions: { handleToggleAdvanceSearch, handleSubmitSearch, ...rest },
     classModifiers: { getFilterBtnClass },
   } = SearchAreaManager();
 
@@ -16,7 +16,7 @@ const SearchArea = () => {
     <article className="search-area">
       <SearchAreaContext.Provider value={{ refs, data, actions: { ...rest } }}>
         <section className="search-area__nav">
-          <SearchBox />
+          <SearchBox handleSubmitSearch={handleSubmitSearch} />
 
           <button
             className={getFilterBtnClass}
