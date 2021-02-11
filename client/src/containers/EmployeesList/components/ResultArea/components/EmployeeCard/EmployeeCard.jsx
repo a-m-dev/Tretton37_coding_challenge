@@ -1,40 +1,20 @@
-import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { ListViewTypes } from "../../../../../../constants";
 import PublicRoutes from "../../../../../../utils/PublicRoutes";
-import { useResultAreaContext } from "../../context";
+import EmployeeCardManager from "./EmployeeCardManager";
 import "./EmployeeCard.scss";
 
 const EmployeeCard = ({
   _id,
   name,
-  email,
   office,
-  phoneNumber,
-  orgUnit,
-  tagLine,
-  github,
-  stackOverflow,
-  linkedIn,
-  twitter,
-  highlighted,
   imageBodyUrl,
   imagePortraitUrl,
-  imageWallOfLeetUrl,
   mainText,
-  manager,
+  ...rest
 }) => {
   const {
-    data: { listViewType },
-  } = useResultAreaContext();
-
-  const getCardClass = useMemo(() => {
-    let result = "employee-card";
-    if (listViewType === ListViewTypes.LIST) result += " employee-card--list";
-    else if (listViewType === ListViewTypes.GRID)
-      result += " employee-card--grid";
-    return result;
-  }, [listViewType]);
+    data: { getCardClass, getContactLinks },
+  } = EmployeeCardManager(rest);
 
   return (
     <article className={getCardClass}>
@@ -60,6 +40,16 @@ const EmployeeCard = ({
           />
         </section>
       </Link>
+
+      {getContactLinks.length > 0 && (
+        <div className="employee-card__contact-links">
+          {getContactLinks.map(({ id, link, icon }) => (
+            <a key={id} href={link} target="_blank">
+              <i className={icon} />
+            </a>
+          ))}
+        </div>
+      )}
     </article>
   );
 };

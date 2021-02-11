@@ -34,7 +34,7 @@ const useFetch = ({ url, method, body, headers = {}, dep = [] }) => {
       const {
         meta: { code },
         error: { message },
-      } = error.response.data;
+      } = error.response?.data;
 
       setError({ code, message });
     } finally {

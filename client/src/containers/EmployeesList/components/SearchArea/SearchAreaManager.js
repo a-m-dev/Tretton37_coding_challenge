@@ -1,15 +1,19 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
-import { useHistory } from "react-router-dom";
-import PublicRoutes from "../../../../utils/PublicRoutes";
+// import { useHistory } from "react-router-dom";
+// import PublicRoutes from "../../../../utils/PublicRoutes";
+import { useEmployeesListContext } from "../../context";
 import { RequestMethods } from "../../../../constants";
 import useFetch from "../../../../hooks/useFetch";
 import ApiEndpoints from "../../../../utils/ApiEndpoints";
 import useQueryParams from "../../../../hooks/useQueryParams";
-import { getGeneratedQueryString } from "../../../../utils/ManageQueryString";
 
 const SearchAreaManager = () => {
-  // push
-  const { push } = useHistory();
+  // // push
+  // const { push } = useHistory();
+
+  const {
+    actions: { handleSearch },
+  } = useEmployeesListContext();
 
   // params
   const params = useQueryParams();
@@ -132,17 +136,16 @@ const SearchAreaManager = () => {
       .filter((link) => selectedContactLists.includes(link.id))
       .map((el) => el.label);
 
-    const queryString = getGeneratedQueryString({
+    handleSearch({
       query,
       sortBy,
       sortOrder,
       selectedOffice,
       contactLists,
     });
-
-    push(`${PublicRoutes.EmployeeList}?${queryString}`);
   }, [
-    push,
+    // push,
+    handleSearch,
     query,
     activeSortId,
     selectedOffice,

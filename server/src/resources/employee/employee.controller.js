@@ -93,13 +93,18 @@ EmployeeController.getEmployeesList = async (req, res, next) => {
   if (queryConfig.office) filterConfig.$or = [{ office: queryConfig.office }];
 
   // contact links
-  if (queryConfig.contactLinks?.length !== 0) {
-    for (let i = 0; i < queryConfig.contactLinks?.length; i++) {
-      filterConfig[queryConfig.contactLinks[i]] = { $ne: null };
+  if (
+    queryConfig.contactLinks !== undefined &&
+    queryConfig.contactLinks?.length !== 0
+  ) {
+    let cl = Array.isArray(queryConfig?.contactLinks)
+      ? queryConfig.contactLinks
+      : [queryConfig.contactLinks];
+
+    for (let i = 0; i < cl.length; i++) {
+      filterConfig[cl[i]] = { $ne: null };
     }
   }
-
-  console.log(">>>> FILTER CONFIG", JSON.stringify(filterConfig, null, 2));
 
   try {
     // get count

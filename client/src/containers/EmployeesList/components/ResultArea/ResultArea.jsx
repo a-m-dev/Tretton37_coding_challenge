@@ -18,10 +18,14 @@ const ResultArea = () => {
         {isLoading && <Loading />}
         {!isLoading && error && <Error />}
 
-        <section className={getListClass}>
-          {employeeData.length > 0 &&
-            employeeData.map((emp) => <EmployeeCard key={emp._id} {...emp} />)}
-        </section>
+        {!isLoading && (
+          <section className={getListClass}>
+            {employeeData.length > 0 &&
+              employeeData.map((emp) => (
+                <EmployeeCard key={emp._id} {...emp} />
+              ))}
+          </section>
+        )}
       </ResultAreaContext.Provider>
     </section>
   );

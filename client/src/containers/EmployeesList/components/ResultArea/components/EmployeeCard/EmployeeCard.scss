@@ -13,6 +13,101 @@
   box-shadow: 0 $spacing-sm $spacing-sm 0 rgba($black, 0.05);
   border-bottom: $spacing-sm solid $primary-color;
 
+  &--grid {
+    height: fit-content;
+
+    &:hover {
+      box-shadow: 0 $spacing-sm $spacing-xl 0 rgba($gray-500, 0.5);
+    }
+
+    & > a {
+      all: unset;
+      cursor: pointer;
+      @include makeFlex(center, center, column);
+    }
+
+    & .employee-card__avatar {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 290px;
+      border-radius: $primary-border-radius;
+      background-color: lighten($gray-200, 10);
+      box-shadow: 0 $spacing-sm $spacing-xl $spacing-sm / 4 rgba($black, 0.2);
+      @include makeFlex(center, center);
+
+      & img {
+        max-width: 100%;
+        min-width: 250px;
+      }
+
+      & i {
+        font-size: $heading-font-size * 3;
+        color: $gray-500;
+      }
+    }
+
+    & .employee-card__details {
+      width: 100%;
+      height: 100%;
+      padding: $spacing-md;
+
+      & * {
+        color: $white;
+      }
+
+      & h2 {
+        color: $gray-800;
+        font-size: $primary-font-size;
+        margin-bottom: $spacing-sm / 2;
+      }
+
+      & span {
+        position: relative;
+        left: -$spacing-sm + 2px;
+      }
+
+      & span,
+      i {
+        color: $gray-500;
+      }
+
+      &-desc {
+        display: none;
+      }
+    }
+
+    & .employee-card__contact-links {
+      position: absolute;
+      bottom: $spacing-xxl * 2.5;
+      left: 50%;
+      transform: translateX(-50%);
+      backdrop-filter: blur(2px);
+      background-color: rgba($white, 0.8);
+      padding: $spacing-sm;
+      border-radius: $primary-border-radius;
+      @include makeFlex(cneter, center);
+
+      & * {
+        transition: color 0.15s ease !important;
+      }
+
+      & a {
+        position: relative;
+        margin: 0 $spacing-sm / 2;
+        color: $gray-500;
+
+        &:hover {
+          color: $primary-color;
+        }
+
+        & i {
+          font-size: $primary-font-size + $spacing-sm / 2;
+        }
+      }
+    }
+  }
+
   &--list {
     margin-bottom: $spacing-xl;
     border-left: $spacing-sm solid $primary-color;
@@ -32,11 +127,10 @@
     & .employee-card__avatar {
       position: relative;
       overflow: hidden;
-      width: 100%;
-      height: 260px;
+      width: fit-content;
+      height: 290px;
       min-width: 200px;
       @include makeFlex(center, center);
-      width: fit-content;
       border-radius: $primary-border-radius;
       background-color: lighten($gray-200, 10);
       box-shadow: 0 $spacing-sm $spacing-lg 0 rgba($gray-500, 0.25);
@@ -44,6 +138,14 @@
       & img {
         min-width: 200px;
         max-width: 300px;
+      }
+
+      & i {
+        min-width: 200px;
+        max-width: 300px;
+        text-align: center;
+        font-size: $heading-font-size * 3;
+        color: $gray-500;
       }
     }
 
@@ -74,6 +176,12 @@
       &-desc {
         position: relative;
         padding-top: $spacing-lg;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* number of lines to show */
+        -webkit-box-orient: vertical;
+        padding: 0 $spacing-sm;
 
         & > p {
           display: none;
@@ -89,63 +197,33 @@
         }
       }
     }
-  }
 
-  &--grid {
-    height: fit-content;
-
-    &:hover {
-      box-shadow: 0 $spacing-sm $spacing-xl 0 rgba($gray-500, 0.5);
-    }
-
-    & > a {
-      all: unset;
-      cursor: pointer;
-      @include makeFlex(center, center, column);
-    }
-
-    & .employee-card__avatar {
-      height: 290px;
-      position: relative;
-      overflow: hidden;
-      width: 100%;
+    & .employee-card__contact-links {
+      position: absolute;
+      bottom: $spacing-xl;
+      left: $spacing-xl;
+      backdrop-filter: blur(2px);
+      background-color: rgba($white, 0.75);
+      padding: $spacing-sm;
       border-radius: $primary-border-radius;
-      background-color: lighten($gray-200, 10);
-      box-shadow: 0 $spacing-sm $spacing-xl $spacing-sm / 4 rgba($black, 0.2);
-      @include makeFlex(center, center);
-
-      & img {
-        max-width: 100%;
-      }
-
-      & i {
-        font-size: $heading-font-size * 3;
-        color: $gray-500;
-      }
-    }
-
-    & .employee-card__details {
-      width: 100%;
-      height: 100%;
-      padding: $spacing-md;
+      @include makeFlex(cneter, center);
 
       & * {
-        color: $white;
+        transition: color 0.15s ease !important;
       }
 
-      & h2 {
-        color: $gray-800;
-        font-size: $primary-font-size;
-        margin-bottom: $spacing-sm / 2;
-      }
-
-      & span,
-      i {
+      & a {
+        position: relative;
+        margin: 0 $spacing-sm / 2;
         color: $gray-500;
-      }
 
-      &-desc {
-        display: none;
+        &:hover {
+          color: $primary-color;
+        }
+
+        & i {
+          font-size: $primary-font-size + $spacing-sm / 2;
+        }
       }
     }
   }

@@ -32,4 +32,46 @@ export const getGeneratedQueryString = ({
   return queryParam.toString();
 };
 
-export const getSearchConfigFromQueryString = (queryString) => {};
+export const getGeneratedQueryStringForApiCall = ({
+  page = 1,
+  perPage = 12,
+  query,
+  sortBy,
+  sortOrder,
+  office,
+  contactLinks,
+}) => {
+  const queryParam = new URLSearchParams();
+
+  // page
+  if (page) queryParam.append("page", page);
+  else query.delete("page");
+
+  // perPage
+  if (perPage) queryParam.append("perPage", perPage);
+  else queryParam.append("perPage", 12);
+
+  // query
+  if (query) queryParam.append("name", query);
+  else queryParam.delete("name");
+
+  // office
+  if (office) queryParam.append("office", office);
+  else queryParam.delete("office");
+
+  // sort
+  if (sortBy && sortOrder) {
+    queryParam.append("sortBy", sortBy);
+    queryParam.append("sortDirection", sortOrder);
+  } else {
+    queryParam.delete("sortBy");
+    queryParam.delete("sortOrder");
+  }
+
+  // contact links
+  if (contactLinks?.length > 0) {
+    contactLinks.forEach((link) => queryParam.append("contactLinks", link));
+  } else queryParam.delete("contactLinks");
+
+  return queryParam.toString();
+};
