@@ -1,0 +1,25 @@
+@import "../../globalStyles/variables.scss";
+@import "../../globalStyles/mixins.scss";
+
+.error {
+  position: relative;
+  width: 100%;
+  padding: $spacing-xl $spacing-md;
+  @include makeFlex(center, center, column);
+
+  & img {
+    max-width: 200px;
+    margin-bottom: $spacing-md;
+  }
+
+  & h3 {
+    font-size: $primary-font-size;
+    color: $gray-800;
+    margin-bottom: $spacing-sm;
+  }
+
+  & p {
+    max-width: 350px;
+    text-align: center;
+  }
+}

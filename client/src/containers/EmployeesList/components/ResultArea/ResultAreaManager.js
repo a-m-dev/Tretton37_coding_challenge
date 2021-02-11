@@ -1,7 +1,12 @@
 import { useState, useCallback, useMemo } from "react";
 import { ListViewTypes } from "../../../../constants";
+import { useEmployeesListContext } from "../../context";
 
 const ResultAreaManager = () => {
+  const {
+    data: { isLoading, error, employeeData, totalResult },
+  } = useEmployeesListContext();
+
   // local states
   const [listViewType, setListViewType] = useState(ListViewTypes.GRID);
 
@@ -13,6 +18,23 @@ const ResultAreaManager = () => {
     ];
   }, []);
 
+  const getListClass = useMemo(() => {
+    let result = "result-area__employees-list";
+
+    switch (true) {
+      case listViewType === ListViewTypes.LIST:
+        result += " result-area__employees-list--list";
+        break;
+
+      case listViewType === ListViewTypes.GRID:
+      default:
+        result += " result-area__employees-list--grid";
+        break;
+    }
+
+    return result;
+  }, [listViewType]);
+
   // handlers
   const handleSwitchListViewType = useCallback(
     (type) => setListViewType(type),
@@ -20,7 +42,15 @@ const ResultAreaManager = () => {
   );
 
   return {
-    data: { listViewType, getListViewTypes },
+    data: {
+      isLoading,
+      error,
+      employeeData,
+      totalResult,
+      getListClass,
+      listViewType,
+      getListViewTypes,
+    },
     actions: { handleSwitchListViewType },
   };
 };

@@ -9,4 +9,5 @@ export { default as Footer } from "./Footer";
 export { default as Form } from "./Form";
 
 // Misc
+export { default as Error } from "./Error";
 export { default as Loading } from "./Loading";

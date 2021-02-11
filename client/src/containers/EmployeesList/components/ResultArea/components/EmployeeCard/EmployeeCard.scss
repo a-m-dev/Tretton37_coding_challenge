@@ -1,0 +1,152 @@
+@import "../../../../../../globalStyles/variables";
+@import "../../../../../../globalStyles/mixins";
+@import "../../../../../../globalStyles/extendables";
+
+.employee-card {
+  position: relative;
+  background-color: rgba($white, 0.5);
+  padding: 0;
+  overflow: hidden;
+  @extend .focusable;
+  @extend .makeLikeCard;
+  border-radius: $primary-border-radius;
+  box-shadow: 0 $spacing-sm $spacing-sm 0 rgba($black, 0.05);
+  border-bottom: $spacing-sm solid $primary-color;
+
+  &--list {
+    margin-bottom: $spacing-xl;
+    border-left: $spacing-sm solid $primary-color;
+    border-bottom: unset;
+    padding: $spacing-lg;
+
+    &:hover {
+      box-shadow: 0 $spacing-sm $spacing-md 0 rgba($gray-500, 0.3) !important;
+    }
+
+    & > a {
+      all: unset;
+      cursor: pointer;
+      @include makeFlex(flex-start, flex-end, row);
+    }
+
+    & .employee-card__avatar {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 260px;
+      min-width: 200px;
+      @include makeFlex(center, center);
+      width: fit-content;
+      border-radius: $primary-border-radius;
+      background-color: lighten($gray-200, 10);
+      box-shadow: 0 $spacing-sm $spacing-lg 0 rgba($gray-500, 0.25);
+
+      & img {
+        min-width: 200px;
+        max-width: 300px;
+      }
+    }
+
+    & .employee-card__details {
+      height: 100%;
+      position: relative;
+      transform: translateY(0);
+      display: block;
+      flex: 1;
+      background: unset;
+      padding: $spacing-xl;
+
+      & * {
+        color: $gray-500;
+      }
+      & h2 {
+        color: $gray-800;
+        font-size: $heading-font-size;
+        padding-left: $spacing-sm;
+        margin-bottom: $spacing-sm / 2;
+      }
+
+      & span,
+      i {
+        color: $gray-500;
+      }
+
+      &-desc {
+        position: relative;
+        padding-top: $spacing-lg;
+
+        & > p {
+          display: none;
+        }
+
+        & > p:first-child {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2; /* number of lines to show */
+          -webkit-box-orient: vertical;
+          padding: 0 $spacing-sm;
+        }
+      }
+    }
+  }
+
+  &--grid {
+    height: fit-content;
+
+    &:hover {
+      box-shadow: 0 $spacing-sm $spacing-xl 0 rgba($gray-500, 0.5);
+    }
+
+    & > a {
+      all: unset;
+      cursor: pointer;
+      @include makeFlex(center, center, column);
+    }
+
+    & .employee-card__avatar {
+      height: 290px;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      border-radius: $primary-border-radius;
+      background-color: lighten($gray-200, 10);
+      box-shadow: 0 $spacing-sm $spacing-xl $spacing-sm / 4 rgba($black, 0.2);
+      @include makeFlex(center, center);
+
+      & img {
+        max-width: 100%;
+      }
+
+      & i {
+        font-size: $heading-font-size * 3;
+        color: $gray-500;
+      }
+    }
+
+    & .employee-card__details {
+      width: 100%;
+      height: 100%;
+      padding: $spacing-md;
+
+      & * {
+        color: $white;
+      }
+
+      & h2 {
+        color: $gray-800;
+        font-size: $primary-font-size;
+        margin-bottom: $spacing-sm / 2;
+      }
+
+      & span,
+      i {
+        color: $gray-500;
+      }
+
+      &-desc {
+        display: none;
+      }
+    }
+  }
+}

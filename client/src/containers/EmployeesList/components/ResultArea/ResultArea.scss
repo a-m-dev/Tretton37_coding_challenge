@@ -3,4 +3,18 @@
 
 .result-area {
   position: relative;
+
+  &__employees-list {
+    position: relative;
+
+    &--grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: $spacing-xl;
+    }
+
+    &--list {
+      display: block;
+    }
+  }
 }
