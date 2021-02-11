@@ -1,0 +1,46 @@
+@import "../../../../../../globalStyles/variables";
+@import "../../../../../../globalStyles/mixins";
+@import "../../../../../../globalStyles/extendables";
+
+.top-heading {
+  position: relative;
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  border-bottom: 2px solid $gray-200;
+  margin-bottom: $spacing-xl;
+  @include makeFlex(space-between, center);
+
+  &__title {
+    font-size: $heading-font-size;
+    color: $gray-800;
+  }
+
+  &__list-types {
+    list-style-type: none;
+    @include makeFlex();
+
+    &-element {
+      width: 32px;
+      height: 32px;
+      @include makeFlex();
+      margin-left: $spacing-sm;
+
+      &--active {
+        & i {
+          color: $gray-800 !important;
+        }
+      }
+
+      & button {
+        all: unset;
+        cursor: pointer;
+
+        & i {
+          font-size: 1.3rem;
+          color: $gray-500;
+          @include makeTransition();
+        }
+      }
+    }
+  }
+}
