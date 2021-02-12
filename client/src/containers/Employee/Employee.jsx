@@ -26,7 +26,7 @@ const Employee = () => {
 
           <i onClick={handleGoBack} className="icon-up-small employee__back" />
 
-          {!isLoading && (
+          {!isLoading && !error && (
             <>
               <Cover />
               <HeadingBox />

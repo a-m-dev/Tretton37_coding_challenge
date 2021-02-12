@@ -3,5 +3,20 @@
 
 .not-found {
   position: relative;
-  background-color: springgreen;
+
+  & a {
+    color: $gray-500;
+    text-align: center;
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
+    padding: $spacing-md $spacing-xl;
+    border: 1px solid $gray-200;
+    @include makeTransition(0.3s, cubic-bezier(0.17, 0.67, 0.31, 0.99));
+
+    &:hover {
+      background-color: $gray-200;
+      color: darken($gray-500, 20);
+    }
+  }
 }
