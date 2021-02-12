@@ -8,7 +8,7 @@ const Employee = () => {
   const {
     data,
     actions,
-    data: { isLoading, error, employeeData },
+    data: { isLoading, error },
     actions: { handleGoBack },
   } = EmployeeManager();
 

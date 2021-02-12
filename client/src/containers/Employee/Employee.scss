@@ -4,6 +4,7 @@
 .employee {
   position: relative;
   padding: $spacing-xl $spacing-md;
+  padding-top: 0;
   min-height: 400px;
   max-width: $table-mid;
   margin: 0 auto;
@@ -27,6 +28,32 @@
 
     &::before {
       margin: $spacing-sm !important;
+    }
+  }
+}
+
+@include MAX_QUERY($tablet-ceil) {
+  .employee {
+    &__back {
+      left: $spacing-xl + $spacing-md;
+      top: $spacing-xl;
+      z-index: 1;
+      background-color: rgba($light-gray, 0.2);
+      color: darken($gray-500, 15);
+    }
+  }
+}
+
+@include MAX_QUERY(525px) {
+  .employee {
+    &__back {
+      left: $spacing-lg + $spacing-md;
+      top: $spacing-lg;
+      z-index: 1;
+      font-size: $heading-font-size;
+      padding: 0;
+      background-color: rgba($light-gray, 0.2);
+      color: darken($gray-500, 15);
     }
   }
 }

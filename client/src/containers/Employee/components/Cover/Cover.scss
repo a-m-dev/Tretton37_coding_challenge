@@ -23,3 +23,11 @@
     color: $gray-200;
   }
 }
+
+@include MAX_QUERY($table-mid) {
+  .cover {
+    & img {
+      min-width: 425px;
+    }
+  }
+}

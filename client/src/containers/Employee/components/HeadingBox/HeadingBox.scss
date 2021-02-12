@@ -74,3 +74,9 @@
     }
   }
 }
+
+@include MAX_QUERY($table-mid) {
+  .heading-box {
+    width: 95%;
+  }
+}

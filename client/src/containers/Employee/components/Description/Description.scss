@@ -32,3 +32,9 @@
     }
   }
 }
+
+@include MAX_QUERY($table-mid) {
+  .description {
+    width: 95%;
+  }
+}
