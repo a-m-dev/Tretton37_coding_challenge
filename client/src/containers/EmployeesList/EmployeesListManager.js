@@ -5,7 +5,10 @@ import ApiEndpoints from "../../utils/ApiEndpoints";
 import useFetch from "../../hooks/useFetch";
 import useQueryParams from "../../hooks/useQueryParams";
 import { RequestMethods } from "../../constants";
-import { getGeneratedQueryString } from "../../utils/ManageQueryString";
+import {
+  getGeneratedQueryString,
+  getGeneratedQueryStringForApiCall,
+} from "../../utils/ManageQueryString";
 
 const EmployeesListManager = () => {
   // push
@@ -15,51 +18,44 @@ const EmployeesListManager = () => {
   const params = useQueryParams();
 
   // local states
-  const [page, setPage] = useState(1);
-  const [totalResult, setTotalResult] = useState(null);
+  const [url, setUrl] = useState(ApiEndpoints.getEmployees());
+  const [page, setPage] = useState(0);
   const [employeeData, setEmployeeData] = useState([]);
-  const [url, setUrl] = useState("");
 
   // fetch data handler
   const { isLoading, error, response } = useFetch({
     url: url,
     method: RequestMethods.GET,
-    dep: [page, url],
+    dep: [url],
   });
 
-  // effects
-  useEffect(() => {
-    console.log(">>>>> RESPONSE", response);
-    response?.data && setEmployeeData(response.data);
-    response?.pagination && setPage(response.pagination.currentPage);
-    response?.pagination
-      ? setTotalResult(response.pagination.totalItems)
-      : setTotalResult(null);
-  }, [response, setEmployeeData, setPage, setTotalResult]);
-
   // useEffect(() => {
-  //   console.log({
-  //     query: params.get("q"),
-  //     sortBy: params.get("sortBy"),
-  //     sortOrder: params.get("sortOrder"),
-  //     office: params.get("office"),
-  //     contactLinks: params.getAll("cl"),
-  //   });
-  // }, [params]);
+  //   console.log(">>> URL", url);
+  // }, [url]);
 
   const handleSearch = useCallback(
     ({ query, sortBy, sortOrder, selectedOffice, contactLists }) => {
-      // console.log("HANDLE SEARCH >>> ", {
-      //   query,
-      //   sortBy,
-      //   sortOrder,
-      //   selectedOffice,
-      //   contactLists,
-      // });
+      // console.log(
+      //   ">>>>> ARGS",
+      //   JSON.stringify(
+      //     {
+      //       page,
+      //       query,
+      //       sortBy,
+      //       sortOrder,
+      //       selectedOffice,
+      //       contactLists,
+      //     },
+      //     null,
+      //     2
+      //   )
+      // );
 
       // TODO:
-      // - call search function
-      const generatedURL = ApiEndpoints.getEmployees({
+      //  - GENERATE API URL
+      //  - push to the updated query params
+
+      const apiURL = ApiEndpoints.getEmployees({
         page,
         query,
         sortBy,
@@ -67,26 +63,29 @@ const EmployeesListManager = () => {
         office: selectedOffice,
         contactLinks: contactLists,
       });
+      setUrl(apiURL);
 
-      // console.log(">>>> URL", generatedURL);
-      setUrl(generatedURL);
-
-      // - update url
-      const queryString = getGeneratedQueryString({
+      // ----------------
+      const generateQueryParam = getGeneratedQueryString({
         query,
         sortBy,
         sortOrder,
         selectedOffice,
         contactLists,
       });
-      push(`${PublicRoutes.EmployeeList}?${queryString}`);
+      push(`${PublicRoutes.EmployeeList}?${generateQueryParam}`);
     },
     [push, setUrl, page]
   );
 
+  const handleEnterWaypoint = useCallback(() => {
+    console.log(">>>> PAGE INCREMENTED", page + 1);
+    setPage((prev) => prev + 1);
+  }, [page]);
+
   return {
-    data: { isLoading, error, totalResult, employeeData },
-    actions: { handleSearch },
+    data: { isLoading, error, employeeData: response?.data || [] },
+    actions: { handleSearch, handleEnterWaypoint },
   };
 };
 

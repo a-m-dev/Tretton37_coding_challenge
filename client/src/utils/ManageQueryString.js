@@ -25,7 +25,7 @@ export const getGeneratedQueryString = ({
   else queryParam.delete("office");
 
   // contact links
-  if (contactLists.length > 0) {
+  if (contactLists?.length > 0) {
     contactLists.forEach((link) => queryParam.append("cl", link));
   } else queryParam.delete("cl");
 
@@ -45,7 +45,7 @@ export const getGeneratedQueryStringForApiCall = ({
 
   // page
   if (page) queryParam.append("page", page);
-  else query.delete("page");
+  else queryParam.delete("page");
 
   // perPage
   if (perPage) queryParam.append("perPage", perPage);

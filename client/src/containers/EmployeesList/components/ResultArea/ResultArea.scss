@@ -3,9 +3,11 @@
 
 .result-area {
   position: relative;
+  margin-bottom: $spacing-xxl;
 
   &__employees-list {
     position: relative;
+    margin-bottom: $spacing-xxl;
 
     &--grid {
       display: grid;
@@ -16,5 +18,11 @@
     &--list {
       display: block;
     }
+  }
+
+  &__load-more {
+    width: 100%;
+    min-height: 100px;
+    @include makeFlex(center, center);
   }
 }

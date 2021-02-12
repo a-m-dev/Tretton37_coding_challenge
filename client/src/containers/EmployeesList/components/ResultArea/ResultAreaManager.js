@@ -4,7 +4,8 @@ import { useEmployeesListContext } from "../../context";
 
 const ResultAreaManager = () => {
   const {
-    data: { isLoading, error, employeeData, totalResult },
+    data: { isLoading, error, employeeData },
+    actions: { handleEnterWaypoint },
   } = useEmployeesListContext();
 
   // local states
@@ -46,12 +47,11 @@ const ResultAreaManager = () => {
       isLoading,
       error,
       employeeData,
-      totalResult,
       getListClass,
       listViewType,
       getListViewTypes,
     },
-    actions: { handleSwitchListViewType },
+    actions: { handleSwitchListViewType, handleEnterWaypoint },
   };
 };
 

@@ -28,7 +28,7 @@ const useFetch = ({ url, method, body, headers = {}, dep = [] }) => {
         },
       });
 
-      setResponse({ ...data });
+      setResponse(data);
     } catch (error) {
       console.log(">>> error", error);
       const {

@@ -1,6 +1,4 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
-// import { useHistory } from "react-router-dom";
-// import PublicRoutes from "../../../../utils/PublicRoutes";
 import { useEmployeesListContext } from "../../context";
 import { RequestMethods } from "../../../../constants";
 import useFetch from "../../../../hooks/useFetch";
@@ -8,9 +6,6 @@ import ApiEndpoints from "../../../../utils/ApiEndpoints";
 import useQueryParams from "../../../../hooks/useQueryParams";
 
 const SearchAreaManager = () => {
-  // // push
-  // const { push } = useHistory();
-
   const {
     actions: { handleSearch },
   } = useEmployeesListContext();
