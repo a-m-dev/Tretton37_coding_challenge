@@ -1,0 +1,76 @@
+@import "../../../../globalStyles/variables";
+@import "../../../../globalStyles/mixins";
+@import "../../../../globalStyles/extendables";
+
+.heading-box {
+  position: relative;
+  margin: 0 auto;
+  min-height: 200px;
+  padding: $spacing-md;
+  padding-top: $spacing-xxl * 2;
+  margin-top: -$spacing-xxl * 3;
+  backdrop-filter: blur(6px);
+  background-color: rgba($primary-color, 0.5);
+  width: calc(100% - #{$spacing-xxl * 3});
+  border-radius: $primary-border-radius * 2;
+  border-bottom: $spacing-sm solid $primary-color;
+  @extend .makeLikeCard;
+  @include makeFlex(center, center, column);
+
+  &__avatar {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    border-radius: 50%;
+    overflow: hidden;
+    left: 50%;
+    top: -$spacing-xxl * 1.5;
+    background-color: $white;
+    transform: translateX(-50%);
+    @extend .makeLikeCard;
+    @include makeFlex(center, center);
+
+    & img {
+      height: 150%;
+    }
+
+    & i {
+      font-size: $heading-font-size * 2;
+      color: $gray-200;
+    }
+  }
+
+  &__employee-data {
+    position: relative;
+    color: $light-gray;
+    @include makeFlex(center, center, column);
+
+    &-name {
+      font-size: $heading-font-size;
+      margin-bottom: $spacing-sm / 2;
+    }
+
+    &-location {
+      font-size: $secondary-font-size;
+      font-weight: bold;
+      color: darken($primary-color, 15);
+      margin-bottom: $spacing-sm;
+    }
+  }
+
+  &__contact-links {
+    position: relative;
+    margin-top: $spacing-sm;
+    font-size: $heading-font-size;
+
+    & a {
+      color: darken($primary-color, 20);
+      margin: 0 $spacing-sm;
+      @include makeTransition(0.3s, ease-in-out);
+
+      &:hover {
+        color: darken($primary-color, 10);
+      }
+    }
+  }
+}

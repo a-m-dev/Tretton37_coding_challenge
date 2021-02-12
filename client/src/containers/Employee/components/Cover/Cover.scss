@@ -1,0 +1,25 @@
+@import "../../../../globalStyles/variables";
+@import "../../../../globalStyles/mixins";
+@import "../../../../globalStyles/extendables";
+
+.cover {
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+  border-radius: $primary-border-radius;
+  background-color: rgba($gray-200, 0.2);
+  backdrop-filter: blur(2px);
+  min-height: 400px;
+  @include makeFlex(center, center);
+
+  & img {
+    width: 100%;
+  }
+
+  & i {
+    font-size: $heading-font-size * 4;
+    position: relative;
+    top: -$spacing-xxl * 1.5;
+    color: $gray-200;
+  }
+}

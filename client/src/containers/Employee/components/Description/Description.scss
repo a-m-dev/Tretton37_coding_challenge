@@ -1,0 +1,34 @@
+@import "../../../../globalStyles/variables";
+@import "../../../../globalStyles/mixins";
+@import "../../../../globalStyles/extendables";
+
+.description {
+  position: relative;
+  width: 100%;
+  @extend .makeLikeCard;
+  width: calc(100% - #{$spacing-xxl * 3});
+  margin: $spacing-xl auto;
+  margin-bottom: $spacing-xxl * 3;
+  padding: $spacing-xxl;
+  backdrop-filter: blur(2px);
+  background-color: rgba($white, 0.3);
+  border-bottom: $spacing-sm solid $gray-200;
+  border-radius: $primary-border-radius * 2;
+  line-height: $spacing-xl;
+  margin-bottom: $spacing-md;
+  color: $gray-500;
+
+  & p {
+    line-height: $spacing-xl;
+    margin-bottom: $spacing-md;
+    @include makeTransition(0.3s, ease-in-out);
+
+    &:hover {
+      color: $gray-800;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

@@ -32,8 +32,8 @@ const useFetch = ({ url, method, body, headers = {}, dep = [] }) => {
     } catch (error) {
       console.log(">>> error", error);
       const {
-        meta: { code },
-        error: { message },
+        meta: { code, message },
+        // error: { message },
       } = error.response?.data;
 
       setError({ code, message });
