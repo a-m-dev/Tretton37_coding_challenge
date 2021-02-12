@@ -1,26 +1,22 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import PublicRoutes from "../../utils/PublicRoutes";
 import ApiEndpoints from "../../utils/ApiEndpoints";
 import useFetch from "../../hooks/useFetch";
-import useQueryParams from "../../hooks/useQueryParams";
 import { RequestMethods } from "../../constants";
-import {
-  getGeneratedQueryString,
-  getGeneratedQueryStringForApiCall,
-} from "../../utils/ManageQueryString";
+import { debounce } from "../../utils/debounce";
+import { getGeneratedQueryString } from "../../utils/ManageQueryString";
 
 const EmployeesListManager = () => {
   // push
   const { push } = useHistory();
 
-  // query params
-  const params = useQueryParams();
-
   // local states
   const [url, setUrl] = useState(ApiEndpoints.getEmployees());
   const [page, setPage] = useState(0);
+  const [filters, setFilters] = useState({});
   const [employeeData, setEmployeeData] = useState([]);
+  const [totalResults, setTotalResults] = useState(null);
 
   // fetch data handler
   const { isLoading, error, response } = useFetch({
@@ -29,62 +25,87 @@ const EmployeesListManager = () => {
     dep: [url],
   });
 
-  // useEffect(() => {
-  //   console.log(">>> URL", url);
-  // }, [url]);
+  useEffect(() => {
+    setPage(1);
+  }, [filters]);
+
+  useEffect(() => {
+    // TODO:
+    //  - api call
+    //  - push to the updated query params
+    handleApiCall({ page, ...filters });
+    handleUpdateUrl({ page, ...filters });
+  }, [page, filters]);
+
+  useEffect(() => {
+    if (response) {
+      const { data, pagination } = response || { data: [] };
+      setTotalResults(pagination.totalItems);
+      if (page > 1) setEmployeeData((prev) => [...prev, ...data]);
+      else setEmployeeData(data);
+    }
+  }, [response]);
 
   const handleSearch = useCallback(
-    ({ query, sortBy, sortOrder, selectedOffice, contactLists }) => {
-      // console.log(
-      //   ">>>>> ARGS",
-      //   JSON.stringify(
-      //     {
-      //       page,
-      //       query,
-      //       sortBy,
-      //       sortOrder,
-      //       selectedOffice,
-      //       contactLists,
-      //     },
-      //     null,
-      //     2
-      //   )
-      // );
-
-      // TODO:
-      //  - GENERATE API URL
-      //  - push to the updated query params
-
-      const apiURL = ApiEndpoints.getEmployees({
-        page,
+    async ({ query, sortBy, sortOrder, selectedOffice, contactLists }) => {
+      setFilters({
         query,
         sortBy,
         sortOrder,
         office: selectedOffice,
         contactLinks: contactLists,
       });
-      setUrl(apiURL);
-
-      // ----------------
-      const generateQueryParam = getGeneratedQueryString({
-        query,
-        sortBy,
-        sortOrder,
-        selectedOffice,
-        contactLists,
-      });
-      push(`${PublicRoutes.EmployeeList}?${generateQueryParam}`);
     },
-    [push, setUrl, page]
+    [push, page]
   );
 
+  const handleApiCall = useCallback(
+    debounce(
+      async ({ page, query, sortBy, sortOrder, office, contactLinks }) => {
+        const apiURL = ApiEndpoints.getEmployees({
+          page,
+          query,
+          sortBy,
+          sortOrder,
+          office,
+          contactLinks,
+        });
+        setUrl(apiURL);
+      },
+      100
+    ),
+    []
+  );
+
+  const handleUpdateUrl = useCallback(
+    ({ page, query, sortBy, sortOrder, office, contactLinks }) => {
+      const generateQueryParam = getGeneratedQueryString(
+        {
+          query,
+          sortBy,
+          sortOrder,
+          selectedOffice: office,
+          contactLists: contactLinks,
+        },
+        250
+      );
+      push(`${PublicRoutes.EmployeeList}?${generateQueryParam}`);
+    },
+    []
+  );
+
+  // handle pagination
   const handleEnterWaypoint = useCallback(() => {
-    console.log(">>>> PAGE INCREMENTED", page + 1);
+    if (Math.ceil(totalResults / 12) < page + 1) {
+      // console.log(">>>> RETURNING ");
+      return;
+    }
+    // console.log(">>>> PAGE INCREMENTED", page + 1);
     setPage((prev) => prev + 1);
-  }, [page]);
+  }, [page, totalResults]);
 
   return {
-    data: { isLoading, error, employeeData: response?.data || [] },
+    data: { isLoading, error, employeeData, totalResults },
     actions: { handleSearch, handleEnterWaypoint },
   };
 };

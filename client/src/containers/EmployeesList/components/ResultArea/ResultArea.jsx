@@ -9,7 +9,7 @@ const ResultArea = () => {
   const {
     data,
     actions,
-    data: { getListClass, isLoading, error, employeeData },
+    data: { getListClass, isLoading, error, employeeData, totalResults },
   } = ResultAreaManager();
 
   return (
@@ -24,12 +24,20 @@ const ResultArea = () => {
 
         {isLoading && <Loading />}
         {!isLoading && error && <Error />}
+        {totalResults === 0 && (
+          <Error
+            heading="Tweak filters again, please"
+            message="There are no result for this filter set!"
+          />
+        )}
 
-        <Waypoint onEnter={actions.handleEnterWaypoint}>
-          <div className="result-area__load-more">
-            THIS IS WAY POINT AREA FOR LOAD MORE
-          </div>
-        </Waypoint>
+        {totalResults >= 12 && (
+          <Waypoint onEnter={actions.handleEnterWaypoint}>
+            <div className="result-area__load-more">
+              THIS IS WAY POINT AREA FOR LOAD MORE
+            </div>
+          </Waypoint>
+        )}
       </ResultAreaContext.Provider>
     </section>
   );

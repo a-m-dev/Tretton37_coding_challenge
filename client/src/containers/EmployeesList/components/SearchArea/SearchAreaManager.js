@@ -109,10 +109,8 @@ const SearchAreaManager = () => {
       );
       Boolean(targetSortConfig) && setActiveSortId(targetSortConfig.id);
     }
-
     // office
     if (params.get("office")) setSelectedOffice(params.get("office"));
-
     // contact links
     if (params.getAll("cl") && params.getAll("cl").length > 0) {
       let ids = [];
@@ -139,8 +137,6 @@ const SearchAreaManager = () => {
       contactLists,
     });
   }, [
-    // push,
-    handleSearch,
     query,
     activeSortId,
     selectedOffice,
