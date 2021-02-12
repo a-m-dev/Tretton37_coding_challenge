@@ -26,3 +26,33 @@
     @include makeFlex(center, center);
   }
 }
+
+@include MAX_QUERY(960px) {
+  .result-area {
+    &__employees-list {
+      &--grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+}
+
+@include MAX_QUERY($table-mid) {
+  .result-area {
+    &__employees-list {
+      &--grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+}
+
+@include MAX_QUERY(525px) {
+  .result-area {
+    &__employees-list {
+      &--grid {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+  }
+}

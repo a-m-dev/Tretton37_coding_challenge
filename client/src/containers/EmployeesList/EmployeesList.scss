@@ -12,3 +12,12 @@
     margin-bottom: $spacing-xl;
   }
 }
+
+@include MAX_QUERY($mobile-ceil) {
+  .employees-list {
+    &__heading {
+      font-size: $primary-font-size + 4px;
+      padding: 0 $spacing-sm;
+    }
+  }
+}

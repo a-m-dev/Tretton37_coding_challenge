@@ -33,3 +33,9 @@
     }
   }
 }
+
+@include MAX_QUERY(568px) {
+  .search-box {
+    max-width: 75%;
+  }
+}

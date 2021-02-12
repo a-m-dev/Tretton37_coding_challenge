@@ -30,3 +30,27 @@
     @include makeTransition(0.3s, ease-in-out);
   }
 }
+
+@include MAX_QUERY($table-mid) {
+  .advance-search-drawer {
+    &__body {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: $spacing-xl;
+
+      & > section {
+        align-self: flex-start;
+      }
+    }
+  }
+}
+
+@include MAX_QUERY(568px) {
+  .advance-search-drawer {
+    &__body {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: $spacing-xl;
+    }
+  }
+}

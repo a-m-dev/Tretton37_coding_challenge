@@ -48,3 +48,11 @@
     }
   }
 }
+
+@include MAX_QUERY(525px) {
+  .top-heading {
+    &__title {
+      font-size: $primary-font-size;
+    }
+  }
+}

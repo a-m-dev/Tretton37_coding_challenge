@@ -227,3 +227,46 @@
     }
   }
 }
+
+@include MAX_QUERY($table-mid) {
+  .employee-card {
+    &--list {
+      & > a {
+        @include makeFlex(center, center, column);
+      }
+
+      & .employee-card__avatar {
+        width: 100%;
+        background-color: $white;
+      }
+
+      & .employee-card__details {
+        margin-bottom: $spacing-xl;
+
+        &-desc {
+          margin-top: $spacing-sm;
+          padding: 0;
+        }
+      }
+
+      & .employee-card__contact-links {
+        width: fit-content;
+        position: relative;
+        background-color: unset;
+      }
+    }
+  }
+}
+
+@include MAX_QUERY(525px) {
+  .employee-card {
+    &--list {
+      & .employee-card__avatar {
+        & img {
+          width: 100%;
+          max-width: unset;
+        }
+      }
+    }
+  }
+}
