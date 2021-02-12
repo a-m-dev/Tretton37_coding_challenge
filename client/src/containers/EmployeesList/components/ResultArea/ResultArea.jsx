@@ -33,9 +33,7 @@ const ResultArea = () => {
 
         {totalResults >= 12 && (
           <Waypoint onEnter={actions.handleEnterWaypoint}>
-            <div className="result-area__load-more">
-              THIS IS WAY POINT AREA FOR LOAD MORE
-            </div>
+            <div className="result-area__load-more" />
           </Waypoint>
         )}
       </ResultAreaContext.Provider>
